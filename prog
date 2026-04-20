@@ -290,43 +290,42 @@ plt.ylabel("Predicted Price")
 plt.title("Multiple Linear Regression - House Price Prediction")
 plt.show()
 --------------------------------------------
-6 . Write a program to Predict Humidity using Decision Tree Algorithm. (daily_weather.csv)
 # STEP 1: Import required libraries
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeRegressor
+from sklearn.tree import DecisionTreeRegressor, plot_tree
 from sklearn.metrics import r2_score
 
 # STEP 2: Load the dataset
 df = pd.read_csv("daily_weather.csv")
 
-# STEP 3: Display available columns
-print("Columns in dataset:")
-print(df.columns)
-print()
-
-# STEP 4: Select input and output
-# Independent variables (all except target)
+# STEP 3: Select input and output
 X = df.drop('relative_humidity_9am', axis=1)
-
-# Dependent variable (target)
 y = df['relative_humidity_9am']
 
-# STEP 5: Split dataset into training and testing
+# STEP 4: Train-test split
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=0
 )
 
-# STEP 6: Create and train Decision Tree model
-model = DecisionTreeRegressor()
+# STEP 5: Train Decision Tree model
+model = DecisionTreeRegressor(max_depth=3)  # depth kept small for clear display
 model.fit(X_train, y_train)
 
-# STEP 7: Predict humidity values
+# STEP 6: Prediction and evaluation
 y_pred = model.predict(X_test)
-
-# STEP 8: Display results
-print("Predicted Humidity (first 5 values):", y_pred[:5])
 print("R2 Score:", r2_score(y_test, y_pred))
+
+# STEP 7: DISPLAY THE DECISION TREE
+plt.figure(figsize=(20, 10))
+plot_tree(
+    model,
+    feature_names=X.columns,
+    filled=True
+)
+plt.title("Decision Tree for Humidity Prediction")
+plt.show()
 ------------------------------------------------
 7.Write a program to implement k-Nearest Neighbour classification algorithm using iris dataset.
 
