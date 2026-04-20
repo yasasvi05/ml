@@ -460,6 +460,15 @@ predictions = model.predict(X_test)
 # STEP 11: Display output
 print("Predicted values (first 5):", predictions[:5])
 
+import matplotlib.pyplot as plt
+
+# Simple plot: Actual vs Predicted
+plt.scatter(y_test, predictions)
+plt.xlabel("Actual Price")
+plt.ylabel("Predicted Price")
+plt.title("MLP Regression: Actual vs Predicted")
+plt.show()
+
 mse = model.evaluate(X_test, y_test)
 print("Mean Squared Error (MSE):", mse)
 -----------------------------------------------------
